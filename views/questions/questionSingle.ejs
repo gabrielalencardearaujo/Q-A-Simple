@@ -1,0 +1,51 @@
+<%- include('../header/head.ejs') %>
+
+  <body>
+    <%- include('../header/navbar.ejs') %>
+
+      <section class="container">
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>
+              <%= question.title %>
+            </h3>
+          </div>
+          <div class="card-body">
+            <p>
+              <%= question.describe %>
+            </p>
+            <p>
+              Date: <%= question.createdAt %>
+            </p>
+            <button class="btn bg-success text-light">Responder</button>
+          </div>
+        </div>
+
+        <form action="/newAnwser" method="POST">
+          <div class="card">
+            <div class="card-header">
+              <h4>Responder</h4>
+            </div>
+            <div class="card-body">
+              <label for="anwserID">Resposta</label><br>
+              <textarea name="body" id="anwserID" rows="10"></textarea>
+              <input type="hidden" name="quesitonID" value="<%= question.id %>" id="quesitonID">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+          </div>
+        </form>
+
+        <hr>
+        <h3>Respostas</h3>
+        <hr>
+        <% anwsers.forEach(resp=> { %>
+          <div class="card mb-4">
+            <div class="card-body">
+              <%= resp.body %>
+            </div>
+          </div>
+        <% }) %>
+      </section>
+      
+      <%- include('../footer/footer.ejs') %>
